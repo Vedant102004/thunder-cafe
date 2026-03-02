@@ -1,0 +1,2278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Thunder Cafe — Best Cafe in Balaghat ⚡</title>
+<meta name="description" content="The Thunder Cafe in Balaghat — Signature white sauce pasta, parties, cozy vibes. 5-star rated. 11AM–11PM.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300;1,9..144,500&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+/* ══════════════════════════════════════
+   TOKENS — Warm Cafe Palette
+══════════════════════════════════════ */
+:root {
+  --espresso:  #1a0e08;
+  --roast:     #2e1b0f;
+  --caramel:   #c07828;
+  --honey:     #e09f3e;
+  --cream:     #f7edd8;
+  --latte:     #ede0c8;
+  --foam:      #faf6ee;
+  --sand:      #d4b896;
+  --sage:      #7a9472;
+  --muted:     #9a8570;
+  --ink:       #3d2b1f;
+
+  --fs-giant:  clamp(3.2rem, 8.5vw, 7.5rem);
+  --fs-xl:     clamp(3rem, 7vw, 6.5rem);
+  --fs-lg:     clamp(1.8rem, 4vw, 3rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Fraunces', serif;
+  background: var(--foam);
+  color: var(--espresso);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── GRAIN OVERLAY (animated) ── */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9000;
+  animation: grainShift 0.5s steps(1) infinite;
+}
+@keyframes grainShift {
+  0%   { transform: translate(0,0); }
+  20%  { transform: translate(-2px, 1px); }
+  40%  { transform: translate(1px, -2px); }
+  60%  { transform: translate(2px, 1px); }
+  80%  { transform: translate(-1px, 2px); }
+  100% { transform: translate(0,0); }
+}
+
+/* ── CUSTOM CURSOR ── */
+.c-dot {
+  width: 10px; height: 10px;
+  background: var(--caramel);
+  border-radius: 50%;
+  position: fixed; pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width .25s, height .25s, background .25s;
+  mix-blend-mode: multiply;
+}
+.c-ring {
+  width: 44px; height: 44px;
+  border: 1.5px solid var(--caramel);
+  border-radius: 50%;
+  position: fixed; pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: left .1s linear, top .1s linear, width .3s, height .3s, border-color .3s;
+  mix-blend-mode: multiply;
+}
+body.hovering .c-dot  { width: 6px; height: 6px; background: var(--honey); }
+body.hovering .c-ring { width: 70px; height: 70px; border-color: var(--honey); }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--latte); }
+::-webkit-scrollbar-thumb { background: var(--caramel); border-radius: 2px; }
+
+/* ══════════════════════════════════════
+   NAV
+══════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 5%;
+  mix-blend-mode: multiply;
+  transition: all .4s ease;
+}
+nav.stuck {
+  mix-blend-mode: normal;
+  background: rgba(250,246,238,.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(192,120,40,.15);
+  padding: 14px 5%;
+}
+.nav-logo {
+  font-family: 'Libre Caslon Display', serif;
+  font-size: 1.55rem;
+  letter-spacing: .5px;
+  color: var(--espresso);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 8px;
+}
+.nav-logo-bolt { color: var(--caramel); font-style: normal; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: .72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  opacity: .65;
+  transition: opacity .2s;
+  position: relative;
+}
+.nav-links a:hover { opacity: 1; }
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -3px; left: 0;
+  width: 0; height: 1px; background: var(--caramel);
+  transition: width .3s;
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-pill {
+  font-family: 'DM Mono', monospace;
+  font-size: .72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--foam);
+  background: var(--espresso);
+  padding: 10px 22px;
+  border-radius: 50px;
+  text-decoration: none;
+  display: flex; align-items: center; gap: 7px;
+  transition: background .3s, transform .2s;
+}
+.nav-pill:hover { background: var(--caramel); transform: translateY(-1px); }
+
+/* ══════════════════════════════════════
+   HERO  — diagonal split + letter-stagger
+══════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: visible; /* IMPORTANT — so cup is never clipped */
+}
+
+/* Left panel */
+.hero-left {
+  background: var(--espresso);
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 140px 5% 80px 6%;
+  position: relative;
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+  z-index: 2;
+}
+
+/* ── DARK TEXTURE OVERLAYS ── */
+/* 1. SVG coffee-bean doodle pattern */
+.hero-left::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cellipse cx='20' cy='20' rx='8' ry='5' fill='none' stroke='%23ffffff' stroke-width='1' opacity='0.04' transform='rotate(-30 20 20)'/%3E%3Cline x1='20' y1='15' x2='20' y2='25' stroke='%23ffffff' stroke-width='0.8' opacity='0.04' transform='rotate(-30 20 20)'/%3E%3Cellipse cx='70' cy='55' rx='8' ry='5' fill='none' stroke='%23ffffff' stroke-width='1' opacity='0.04' transform='rotate(20 70 55)'/%3E%3Cline x1='70' y1='50' x2='70' y2='60' stroke='%23ffffff' stroke-width='0.8' opacity='0.04' transform='rotate(20 70 55)'/%3E%3Cellipse cx='40' cy='90' rx='7' ry='4' fill='none' stroke='%23ffffff' stroke-width='1' opacity='0.035' transform='rotate(-15 40 90)'/%3E%3Cline x1='40' y1='86' x2='40' y2='94' stroke='%23ffffff' stroke-width='0.8' opacity='0.035' transform='rotate(-15 40 90)'/%3E%3Cellipse cx='100' cy='20' rx='6' ry='3.5' fill='none' stroke='%23ffffff' stroke-width='1' opacity='0.03' transform='rotate(45 100 20)'/%3E%3Cline x1='100' y1='16.5' x2='100' y2='23.5' stroke='%23ffffff' stroke-width='0.8' opacity='0.03' transform='rotate(45 100 20)'/%3E%3Cellipse cx='95' cy='85' rx='7' ry='4.5' fill='none' stroke='%23ffffff' stroke-width='1' opacity='0.04' transform='rotate(-40 95 85)'/%3E%3Cline x1='95' y1='80.5' x2='95' y2='89.5' stroke='%23ffffff' stroke-width='0.8' opacity='0.04' transform='rotate(-40 95 85)'/%3E%3C/svg%3E");
+  background-size: 120px 120px;
+  pointer-events: none;
+  z-index: 0;
+}
+/* 2. Subtle radial vignette for depth */
+.hero-left::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 80% at 30% 50%, rgba(192,120,40,0.06) 0%, transparent 70%),
+              linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+/* All direct children above texture */
+.hero-left > * { position: relative; z-index: 1; }
+
+/* ── FLOATING HERO IMAGE — Transparent SVG Cup ── */
+.hero-float-img {
+  position: absolute;
+  /* Diagonal line on 50% grid = left panel's right edge ~50% of viewport */
+  left: calc(50% - 140px);  /* center cup on the diagonal line */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 280px;
+  z-index: 10;
+  pointer-events: none;
+  animation: heroFloat 5s ease-in-out infinite;
+  /* Cup is now a direct child of .hero — no clip-path can touch it */
+}
+.float-cup-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(-16px 28px 44px rgba(10,6,2,0.75))
+          drop-shadow(0 0 55px rgba(192,120,40,0.2));
+}
+.hero-float-img img { display: none; }
+/* Steam wisps */
+.float-steam {
+  position: absolute;
+  top: -48px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 16px;
+}
+.float-steam-line {
+  width: 3px; height: 44px;
+  background: linear-gradient(to top, rgba(224,159,62,0.65), transparent);
+  border-radius: 2px;
+  animation: steamRise 2.2s ease-in-out infinite;
+}
+.float-steam-line:nth-child(2) { animation-delay: 0.7s; height: 34px; opacity: .75; }
+.float-steam-line:nth-child(3) { animation-delay: 1.4s; height: 42px; }
+@keyframes heroFloat {
+  0%,100% { transform: translateY(-50%) rotate(-1.5deg) scale(1); }
+  50%      { transform: translateY(calc(-50% - 22px)) rotate(1.5deg) scale(1.02); }
+}
+
+/* ── FLOATING COFFEE BEAN PARTICLES CANVAS ── */
+#beans-canvas {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: .5;
+}
+/* Right panel */
+.hero-right {
+  background: var(--cream);
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: flex-end;
+  padding: 140px 6% 80px 5%;
+  position: relative;
+}
+
+/* Steam SVG */
+.steam-wrap {
+  position: absolute; top: 60px; right: 80px;
+  display: flex; gap: 10px;
+  opacity: .6;
+}
+.steam-path {
+  width: 12px; height: 60px;
+}
+.steam-path path {
+  fill: none;
+  stroke: var(--sand);
+  stroke-width: 2;
+  stroke-linecap: round;
+  animation: steamRise 2.5s ease-in-out infinite;
+}
+.steam-path:nth-child(2) path { animation-delay: .6s; }
+.steam-path:nth-child(3) path { animation-delay: 1.2s; }
+@keyframes steamRise {
+  0%   { stroke-dasharray: 60; stroke-dashoffset: 60; opacity: 0; transform: translateY(10px); }
+  30%  { opacity: .8; }
+  100% { stroke-dasharray: 60; stroke-dashoffset: -60; opacity: 0; transform: translateY(-10px); }
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: .68rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--honey);
+  margin-bottom: 28px;
+  display: flex; align-items: center; gap: 12px;
+  opacity: 0;
+  animation: fadeIn .6s ease 1s forwards;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block; width: 0; height: 1px; background: var(--honey);
+  animation: growLine .6s ease 1.2s forwards;
+}
+@keyframes growLine { to { width: 28px; } }
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* LETTER STAGGER TITLE */
+.hero-title {
+  font-family: 'Libre Caslon Display', serif;
+  font-size: var(--fs-giant);
+  line-height: .88;
+  color: var(--cream);
+  margin-bottom: 36px;
+  letter-spacing: -2px;
+}
+.hero-title .letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(60px) rotate(8deg);
+  animation: letterDrop .5s cubic-bezier(.16,1,.3,1) forwards;
+}
+.hero-title .word { display: block; white-space: nowrap; overflow: visible; }
+
+@keyframes letterDrop {
+  to { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
+
+.hero-hindi {
+  font-family: 'Pacifico', cursive;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: var(--honey);
+  letter-spacing: .5px;
+  margin-bottom: 44px;
+  opacity: 0;
+  text-shadow:
+    0 0 20px rgba(224,159,62,0.55),
+    0 0 60px rgba(192,120,40,0.25),
+    0 2px 8px rgba(26,14,8,0.4);
+  animation: fadeSlideUp .7s ease 1.8s forwards;
+}
+
+/* Fade-slide-up for right side elements */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-cta-group {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeIn .6s ease 2s forwards;
+}
+
+/* ── SCRAMBLE TEXT on right side ── */
+.hero-right-content { max-width: 380px; }
+.hero-right-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: .65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 18px;
+  opacity: 0;
+  animation: fadeSlideUp .7s ease 1.4s forwards;
+}
+.hero-scramble {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--espresso);
+  letter-spacing: -.5px;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeSlideUp .8s ease 1.55s forwards;
+}
+
+.hero-desc {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.85;
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: fadeSlideUp .8s ease 1.75s forwards;
+}
+
+/* Rating badge on right */
+.rating-badge {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 18px 22px;
+  background: var(--espresso);
+  border-radius: 14px;
+  opacity: 0;
+  animation: fadeSlideUp .8s ease 1.95s forwards;
+}
+.rb-num {
+  font-family: 'Libre Caslon Display', serif;
+  font-size: 2.8rem;
+  color: var(--honey);
+  line-height: 1;
+}
+.rb-stars { color: var(--honey); font-size: .9rem; letter-spacing: 2px; }
+.rb-text { font-family: 'DM Mono', monospace; font-size: .62rem; color: var(--sand); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 3px; }
+
+/* ── SCROLL HINT ── */
+.scroll-hint {
+  position: absolute; bottom: 40px; left: 6%;
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: .62rem; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--sand);
+  opacity: 0; animation: fadeIn .6s ease 2.4s forwards;
+}
+.scroll-arrow {
+  width: 28px; height: 28px;
+  border: 1px solid var(--sand);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  animation: arrowBounce 1.5s ease infinite;
+}
+@keyframes arrowBounce {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(6px); }
+}
+
+/* ══════════════════════════════════════
+   BUTTONS
+══════════════════════════════════════ */
+.btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: 'DM Mono', monospace;
+  font-size: .73rem; letter-spacing: 2px;
+  text-transform: uppercase; text-decoration: none;
+  padding: 15px 28px; border-radius: 50px;
+  border: none; cursor: none;
+  transition: transform .25s, box-shadow .25s;
+  position: relative; overflow: hidden;
+}
+.btn::after {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(255,255,255,.15);
+  transform: translateX(-100%);
+  transition: transform .4s ease;
+}
+.btn:hover::after { transform: translateX(0); }
+.btn:hover { transform: translateY(-3px); }
+
+.btn-warm {
+  background: linear-gradient(135deg, var(--caramel) 0%, #d4892e 100%);
+  color: var(--foam);
+  box-shadow: 0 8px 28px rgba(192,120,40,.4);
+  animation: btnPulse 2s ease-in-out infinite;
+}
+.btn-warm:hover {
+  box-shadow: 0 16px 40px rgba(192,120,40,.65);
+  animation: none;
+  transform: translateY(-4px) scale(1.02);
+}
+@keyframes btnPulse {
+  0%   { box-shadow: 0 8px 28px rgba(192,120,40,.4), 0 0 0 0 rgba(192,120,40,.5); }
+  50%  { box-shadow: 0 8px 28px rgba(192,120,40,.3), 0 0 0 14px rgba(192,120,40,0); }
+  100% { box-shadow: 0 8px 28px rgba(192,120,40,.4), 0 0 0 0 rgba(192,120,40,.5); }
+}
+.btn-outline {
+  background: transparent;
+  color: var(--cream);
+  border: 1.5px solid rgba(247,237,216,.35) !important;
+}
+.btn-outline:hover { border-color: rgba(247,237,216,.7) !important; }
+.btn-dark {
+  background: var(--espresso);
+  color: var(--cream);
+  box-shadow: 0 8px 28px rgba(26,14,8,.3);
+}
+.btn-dark:hover { box-shadow: 0 16px 40px rgba(26,14,8,.5); }
+.btn-sage {
+  background: var(--sage);
+  color: #fff;
+  box-shadow: 0 8px 28px rgba(122,148,114,.3);
+}
+
+/* ══════════════════════════════════════
+   DIAGONAL DIVIDER
+══════════════════════════════════════ */
+.diag-down {
+  height: 80px; background: var(--espresso);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 30%);
+}
+.diag-up {
+  height: 80px;
+  clip-path: polygon(0 0, 100% 40%, 100% 100%, 0 100%);
+}
+
+/* ══════════════════════════════════════
+   SECTION COMMON
+══════════════════════════════════════ */
+section { padding: 110px 5%; }
+
+.eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: .68rem; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--caramel);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 14px;
+}
+.eyebrow::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--caramel);
+  flex-shrink: 0;
+}
+
+.sec-title {
+  font-family: 'Libre Caslon Display', serif;
+  font-size: var(--fs-xl);
+  line-height: .95;
+  letter-spacing: -2px;
+  color: var(--espresso);
+  margin-bottom: 18px;
+}
+.sec-title em { font-style: italic; color: var(--caramel); }
+
+.sec-sub {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.9;
+  max-width: 500px;
+}
+
+/* ── CURTAIN REVEAL ── */
+.curtain {
+  position: relative;
+  overflow: hidden;
+}
+.curtain::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--latte);
+  transform-origin: left;
+  transform: scaleX(1);
+  transition: transform .9s cubic-bezier(.77,0,.18,1);
+  z-index: 5;
+}
+.curtain.open::before { transform: scaleX(0); transform-origin: right; }
+
+/* ── WIPE IN (clip-path) ── */
+.wipe {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1s cubic-bezier(.16,1,.3,1);
+}
+.wipe.in { clip-path: inset(0 0% 0 0); }
+
+/* ── FADE RISE ── */
+.fr {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity .8s ease, transform .8s cubic-bezier(.16,1,.3,1);
+}
+.fr.in { opacity: 1; transform: translateY(0); }
+.fr-d1 { transition-delay: .12s; }
+.fr-d2 { transition-delay: .24s; }
+.fr-d3 { transition-delay: .36s; }
+
+/* ══════════════════════════════════════
+   GLOBAL TEXTURES
+══════════════════════════════════════ */
+
+/* ── Grain texture on ALL dark/espresso backgrounds ── */
+.hero-left::before,
+.stats-section::after,
+.testi-section::after,
+.final-section::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.055'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 1;
+}
+
+/* ── Coffee bean pattern on dark sections (stats + final) ── */
+.stats-section { position: relative; }
+.final-section { position: relative; overflow: hidden; }
+
+.stats-section::before,
+.final-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cellipse cx='20' cy='25' rx='7' ry='4.5' fill='none' stroke='%23ffffff' stroke-width='1.2' opacity='0.05' transform='rotate(-35 20 25)'/%3E%3Cline x1='20' y1='20.5' x2='20' y2='29.5' stroke='%23ffffff' stroke-width='1' opacity='0.05' transform='rotate(-35 20 25)'/%3E%3Cellipse cx='65' cy='60' rx='6' ry='3.8' fill='none' stroke='%23ffffff' stroke-width='1.2' opacity='0.045' transform='rotate(25 65 60)'/%3E%3Cline x1='65' y1='56.2' x2='65' y2='63.8' stroke='%23ffffff' stroke-width='1' opacity='0.045' transform='rotate(25 65 60)'/%3E%3Cellipse cx='85' cy='15' rx='5.5' ry='3.5' fill='none' stroke='%23ffffff' stroke-width='1' opacity='0.04' transform='rotate(-50 85 15)'/%3E%3Cellipse cx='35' cy='80' rx='6.5' ry='4' fill='none' stroke='%23ffffff' stroke-width='1.2' opacity='0.05' transform='rotate(15 35 80)'/%3E%3Cline x1='35' y1='76' x2='35' y2='84' stroke='%23ffffff' stroke-width='1' opacity='0.05' transform='rotate(15 35 80)'/%3E%3Cellipse cx='78' cy='40' rx='5' ry='3' fill='none' stroke='%23ffffff' stroke-width='1' opacity='0.035' transform='rotate(60 78 40)'/%3E%3C/svg%3E");
+  background-size: 100px 100px;
+  pointer-events: none; z-index: 0;
+}
+
+/* ── Paper texture on light/cream sections ── */
+.menu-section::before,
+.location-section::before,
+.hero-right::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='pp'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.048'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23pp)' opacity='1'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 0;
+  mix-blend-mode: multiply;
+}
+.menu-section, .location-section { position: relative; }
+.menu-section > *, .location-section > * { position: relative; z-index: 1; }
+.hero-right { position: relative; }
+.hero-right > * { position: relative; z-index: 1; }
+
+/* ── Latte/party section warm texture ── */
+@keyframes shiftGrad { to { background-position: 200% 0; } }
+.party-section::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='lt'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23lt)' opacity='0.042'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 1;
+}
+
+/* ══════════════════════════════════════
+   ABOUT SECTION — Image Bento Grid
+══════════════════════════════════════ */
+.about-section {
+  background: var(--latte);
+  position: relative;
+}
+/* Warm paper texture on about section */
+.about-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.055'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 0;
+  mix-blend-mode: multiply;
+}
+.about-section > * { position: relative; z-index: 1; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 70px; align-items: center;
+}
+
+/* ── BENTO GRID — 4 cells, asymmetric ── */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  grid-template-rows: 220px 160px 140px;
+  gap: 10px;
+  position: relative;
+}
+
+.bg-cell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  cursor: default;
+}
+.bg-cell img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .9s cubic-bezier(.16,1,.3,1), filter .9s ease;
+  filter: brightness(.82) saturate(1.15) contrast(1.05);
+}
+.bg-cell:hover img {
+  transform: scale(1.09);
+  filter: brightness(.95) saturate(1.25) contrast(1.08);
+}
+
+/* Dark gradient overlay on each cell */
+.bg-cell-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(26,14,8,.82) 0%,
+    rgba(26,14,8,.18) 50%,
+    transparent 100%
+  );
+  transition: opacity .4s;
+}
+.bg-cell:hover .bg-cell-overlay { opacity: .6; }
+
+/* Thin caramel border glow on hover */
+.bg-cell::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 16px;
+  border: 1.5px solid transparent;
+  transition: border-color .4s;
+  pointer-events: none;
+  z-index: 2;
+}
+.bg-cell:hover::after { border-color: rgba(192,120,40,.45); }
+
+.bg-cell-label {
+  position: absolute; bottom: 12px; left: 14px;
+  font-family: 'DM Mono', monospace;
+  font-size: .58rem; letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(247,237,216,.82);
+  z-index: 3;
+  transition: color .3s;
+}
+.bg-cell:hover .bg-cell-label { color: var(--honey); }
+
+/* Cell 1 — Big tall left, spans rows 1+2 */
+.bg-tall {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+/* Cell 2 — Top right: food */
+.bg-top-right {
+  grid-column: 2;
+  grid-row: 1;
+}
+/* Cell 3 — Bottom right: people */
+.bg-bottom-right {
+  grid-column: 2;
+  grid-row: 2;
+}
+/* Cell 4 — Full-width bottom: coffee/drinks */
+.bg-wide {
+  grid-column: 1 / 3;
+  grid-row: 3;
+}
+/* Wide cell label aligned right */
+.bg-wide .bg-cell-label { left: auto; right: 14px; }
+
+/* Caramel rating badge */
+.about-float {
+  position: absolute;
+  bottom: -16px; right: -16px;
+  background: linear-gradient(135deg, var(--caramel), #d4892e);
+  border-radius: 16px;
+  padding: 18px 22px;
+  z-index: 5;
+  animation: floatY 4s ease-in-out infinite;
+  box-shadow: 0 14px 36px rgba(192,120,40,.45);
+}
+.af-num {
+  font-family: 'Libre Caslon Display', serif;
+  font-size: 2.4rem; line-height: 1;
+  color: var(--foam);
+}
+.af-text {
+  font-family: 'DM Mono', monospace;
+  font-size: .58rem; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(250,246,238,.75);
+  margin-top: 3px;
+}
+@keyframes floatY {
+  0%,100% { transform: translateY(0) rotate(-1deg); }
+  50%      { transform: translateY(-10px) rotate(1deg); }
+}
+
+/* Info chips */
+.about-info-chips {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin: 26px 0 8px;
+}
+.aic {
+  display: flex; align-items: center; gap: 9px;
+  padding: 10px 13px;
+  background: var(--foam);
+  border: 1px solid rgba(192,120,40,.14);
+  border-radius: 10px;
+  font-size: .85rem; color: var(--ink);
+  font-weight: 300;
+  transition: all .25s;
+}
+.aic:hover { border-color: var(--caramel); background: var(--cream); }
+.aic-icon { font-size: 1rem; flex-shrink: 0; }
+
+.feat-list {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-top: 16px;
+}
+.feat-item {
+  display: flex; align-items: center; gap: 11px;
+  padding: 13px 15px;
+  background: var(--foam);
+  border: 1px solid rgba(192,120,40,.13);
+  border-radius: 12px;
+  font-size: .9rem; color: var(--ink);
+  transition: all .3s;
+}
+.feat-item:hover {
+  background: var(--cream);
+  border-color: var(--caramel);
+  transform: translateX(4px);
+}
+.feat-item .fi { font-size: 1.1rem; }
+
+/* ══════════════════════════════════════
+   STATS — ODOMETER COUNTERS
+══════════════════════════════════════ */
+.stats-section {
+  background: var(--espresso);
+  padding: 80px 5%;
+}
+.stats-row {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 1px; background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px; overflow: hidden;
+}
+.stat-box {
+  background: rgba(26,14,8,.6);
+  padding: 48px 36px; text-align: center;
+  transition: background .3s;
+}
+.stat-box:hover { background: rgba(192,120,40,.08); }
+
+/* Odometer digit slots */
+.odometer {
+  font-family: 'Libre Caslon Display', serif;
+  font-size: 3.8rem; line-height: 1;
+  color: var(--honey);
+  display: flex; align-items: flex-end; justify-content: center;
+  gap: 1px; overflow: hidden; height: 1em;
+}
+.odo-digit {
+  position: relative;
+  overflow: hidden;
+  height: 1em;
+  min-width: .6em;
+}
+.odo-reel {
+  position: absolute; top: 0; left: 0;
+  display: flex; flex-direction: column;
+  transition: transform 1.4s cubic-bezier(.19,1,.22,1);
+}
+.odo-reel span { line-height: 1; }
+.odo-suffix {
+  font-size: 2.5rem; color: var(--honey);
+  align-self: flex-end; padding-bottom: .05em;
+}
+.odo-prefix {
+  font-size: 2.5rem; color: var(--sand);
+  align-self: flex-end; padding-bottom: .05em;
+}
+.stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: .62rem; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--muted);
+  margin-top: 10px;
+}
+
+/* ══════════════════════════════════════
+   MENU — FLIP CARDS (Photo Front)
+══════════════════════════════════════ */
+.menu-section { background: var(--foam); }
+.menu-section .sec-title { color: var(--espresso); }
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 22px; margin-top: 56px;
+}
+
+.flip-card {
+  perspective: 900px;
+  height: 360px;
+}
+.flip-inner {
+  position: relative;
+  width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .75s cubic-bezier(.16,1,.3,1);
+  cursor: none;
+}
+.flip-card:hover .flip-inner { transform: rotateY(180deg); }
+
+.flip-front, .flip-back {
+  position: absolute; inset: 0;
+  border-radius: 20px;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+/* FRONT: full photo with dark gradient overlay */
+.flip-front {
+  background: var(--espresso);
+  border: 1px solid rgba(192,120,40,.15);
+}
+.flip-front-photo {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform .75s ease;
+}
+.flip-card:hover .flip-front-photo { transform: scale(1.06); }
+.flip-front-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(26,14,8,0.92) 0%,
+    rgba(26,14,8,0.55) 45%,
+    rgba(26,14,8,0.15) 100%
+  );
+}
+.flip-front-content {
+  position: absolute; inset: 0;
+  padding: 24px 26px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.card-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: .58rem; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--honey);
+  background: rgba(192,120,40,.2);
+  border: 1px solid rgba(192,120,40,.3);
+  border-radius: 50px; padding: 4px 11px;
+  display: inline-block; width: fit-content;
+  margin-bottom: 8px;
+}
+.card-name {
+  font-family: 'Libre Caslon Display', serif;
+  font-size: 1.5rem; line-height: 1.1;
+  color: var(--cream); margin-bottom: 8px;
+  letter-spacing: -.3px;
+}
+.card-price {
+  font-family: 'Libre Caslon Display', serif;
+  font-size: 1.7rem; color: var(--honey);
+  letter-spacing: -1px;
+}
+.flip-hint {
+  position: absolute; top: 18px; right: 18px;
+  font-family: 'DM Mono', monospace;
+  font-size: .55rem; letter-spacing: 1.5px;
+  text-transform: uppercase; color: rgba(255,255,255,.5);
+  display: flex; align-items: center; gap: 5px;
+  background: rgba(0,0,0,.3);
+  backdrop-filter: blur(4px);
+  padding: 5px 10px; border-radius: 50px;
+}
+.flip-hint::after {
+  content: '↻';
+  display: inline-block;
+  animation: spinHint 2s linear infinite;
+}
+@keyframes spinHint { to { transform: rotate(360deg); } }
+
+.flip-back {
+  background: var(--espresso);
+  border: 1px solid rgba(192,120,40,.2);
+  transform: rotateY(180deg);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 32px;
+}
+
+/* ══════════════════════════════════════
+   PARTY BOOKING
+══════════════════════════════════════ */
+.party-section {
+  background: var(--latte);
+  position: relative;
+  overflow: hidden;
+}
+/* SVG blob morph background */
+.blob-bg {
+  position: absolute; top: -100px; right: -100px;
+  width: 600px; height: 600px;
+  opacity: .06; pointer-events: none;
+}
+.blob-path {
+  fill: var(--caramel);
+  animation: blobMorph 8s ease-in-out infinite;
+}
+@keyframes blobMorph {
+  0%,100% { d: path("M421.2,291.4Q381,382.8,277.8,421.4Q174.6,460,96.8,367.5Q19,275,54.4,165.1Q89.8,55.2,194.6,35.6Q299.4,16,375.9,95.3Q452.4,174.6,421.2,291.4Z"); }
+  33%     { d: path("M407.7,304.9Q370.4,409.8,254.4,427.1Q138.4,444.4,79.2,339.6Q20,234.8,72.2,141.4Q124.4,48,244.4,38.6Q364.4,29.2,413.6,141.6Q462.8,254,407.7,304.9Z"); }
+  66%     { d: path("M420.9,308.1Q382,416.2,264.5,428.2Q147,440.2,76.5,336.1Q6,232,60.5,133.5Q115,35,248,18.5Q381,2,427.5,143.5Q474,285,420.9,308.1Z"); }
+}
+
+.party-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+  position: relative; z-index: 1;
+}
+.party-feats { display: flex; flex-direction: column; gap: 16px; margin-top: 40px; }
+.pf {
+  display: flex; align-items: flex-start; gap: 18px;
+  padding: 20px 22px;
+  background: var(--foam);
+  border: 1px solid rgba(192,120,40,.12);
+  border-radius: 14px;
+  transition: all .3s;
+}
+.pf:hover {
+  background: var(--cream);
+  border-color: var(--caramel);
+  transform: translateX(6px);
+}
+.pf-ico {
+  font-size: 1.4rem; width: 44px; height: 44px;
+  flex-shrink: 0; border-radius: 12px;
+  background: rgba(192,120,40,.1);
+  display: flex; align-items: center; justify-content: center;
+}
+.pf-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1rem; color: var(--espresso); margin-bottom: 4px; }
+.pf-desc { font-size: .88rem; font-weight: 300; color: var(--muted); line-height: 1.6; }
+
+.scarcity-chip {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(192,120,40,.1);
+  border: 1px solid rgba(192,120,40,.25);
+  border-radius: 50px;
+  padding: 10px 18px; margin-top: 26px;
+  font-family: 'DM Mono', monospace;
+  font-size: .65rem; letter-spacing: 1.5px;
+  color: var(--caramel); text-transform: uppercase;
+}
+.sc-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--caramel);
+  animation: scPulse 1.5s infinite;
+}
+@keyframes scPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(192,120,40,.6); }
+  60%      { box-shadow: 0 0 0 7px rgba(192,120,40,0); }
+}
+
+/* BOOKING FORM */
+.book-form {
+  background: var(--espresso);
+  border-radius: 24px; padding: 48px;
+  position: relative; overflow: hidden;
+}
+.book-form::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--caramel), var(--honey), var(--sage));
+  background-size: 200%;
+  animation: shiftGrad 3s linear infinite;
+}
+.form-h {
+  font-family: 'Libre Caslon Display', serif;
+  font-size: 2rem; color: var(--cream);
+  letter-spacing: -.5px; margin-bottom: 32px;
+}
+.fg { display: flex; flex-direction: column; gap: 7px; }
+.fg label {
+  font-family: 'DM Mono', monospace;
+  font-size: .6rem; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--sand);
+}
+.fg input, .fg select, .fg textarea {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 10px;
+  color: var(--cream);
+  padding: 13px 16px;
+  font-family: 'Fraunces', serif; font-size: .98rem;
+  outline: none; transition: all .25s;
+}
+.fg input::placeholder, .fg textarea::placeholder { color: rgba(212,184,150,.3); }
+.fg input:focus, .fg select:focus, .fg textarea:focus {
+  border-color: rgba(192,120,40,.6);
+  background: rgba(192,120,40,.06);
+  box-shadow: 0 0 0 3px rgba(192,120,40,.12);
+}
+.fg select option { background: var(--roast); }
+.fg textarea { resize: vertical; min-height: 86px; }
+.form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.full { grid-column: 1/-1; }
+
+.form-submit {
+  width: 100%;
+  background: linear-gradient(135deg, var(--caramel), var(--honey));
+  color: var(--espresso);
+  border: none; border-radius: 12px;
+  padding: 16px;
+  font-family: 'DM Mono', monospace;
+  font-weight: 500; font-size: .78rem;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  cursor: none; margin-top: 10px;
+  transition: all .3s;
+  box-shadow: 0 8px 28px rgba(192,120,40,.35);
+  font-weight: 700;
+}
+.form-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 44px rgba(192,120,40,.5);
+}
+.form-alts { display: flex; gap: 12px; margin-top: 14px; }
+.fa-btn {
+  flex: 1; display: flex; align-items: center;
+  justify-content: center; gap: 8px;
+  padding: 12px; border-radius: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: .68rem; letter-spacing: 1.5px;
+  text-transform: uppercase; text-decoration: none;
+  transition: all .3s; font-weight: 500;
+}
+.wa { background: rgba(37,211,102,.1); color: #25D366; border: 1px solid rgba(37,211,102,.25); }
+.wa:hover { background: rgba(37,211,102,.18); }
+.ph { background: rgba(192,120,40,.1); color: var(--caramel); border: 1px solid rgba(192,120,40,.25); }
+.ph:hover { background: rgba(192,120,40,.18); }
+
+/* ══════════════════════════════════════
+   TESTIMONIALS — Parallax BG
+══════════════════════════════════════ */
+.testi-section {
+  background-image: url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1920&auto=format&fit=crop&q=80');
+  background-size: cover;
+  background-position: center 40%;
+  background-attachment: fixed;
+  position: relative;
+}
+.testi-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(26,14,8,0.93) 0%,
+    rgba(44,24,8,0.88) 50%,
+    rgba(26,14,8,0.95) 100%
+  );
+  z-index: 0;
+}
+.testi-section > * { position: relative; z-index: 1; }
+.testi-section .sec-title { color: var(--cream); }
+.testi-section .eyebrow { color: var(--honey); }
+.testi-section .eyebrow::before { background: var(--honey); }
+.testi-section .sec-sub { color: var(--sand); }
+
+/* Back side labels shared */
+.back-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: .6rem; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--honey);
+  margin-bottom: 14px;
+}
+.back-desc {
+  font-size: 1rem; font-weight: 300;
+  color: var(--sand); line-height: 1.8;
+  font-style: italic; margin-bottom: 24px;
+}
+.back-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: .7rem; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--honey);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(224,159,62,.3);
+  padding-bottom: 4px; width: fit-content;
+  transition: border-color .3s;
+}
+.back-cta:hover { border-color: var(--honey); }
+
+.testi-scroll {
+  display: flex; gap: 20px;
+  overflow-x: auto; padding-bottom: 20px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 52px;
+  scrollbar-width: none;
+}
+.testi-scroll::-webkit-scrollbar { display: none; }
+
+.testi-card {
+  min-width: 340px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 20px; padding: 32px;
+  scroll-snap-align: start;
+  transition: all .4s;
+  position: relative;
+  overflow: hidden;
+}
+.testi-card::before {
+  content: '"';
+  position: absolute; top: 16px; right: 24px;
+  font-family: 'Libre Caslon Display', serif;
+  font-size: 6rem; color: var(--caramel); opacity: .15;
+  line-height: 1;
+}
+.testi-card:hover {
+  background: rgba(192,120,40,.06);
+  border-color: rgba(192,120,40,.2);
+  transform: translateY(-5px);
+}
+.tc-stars { color: var(--honey); font-size: .85rem; letter-spacing: 2px; margin-bottom: 14px; }
+.tc-text {
+  font-size: 1rem; font-weight: 300; font-style: italic;
+  color: var(--latte); line-height: 1.8; margin-bottom: 22px;
+}
+.tc-author { font-family: 'Fraunces', serif; font-weight: 700; font-size: .95rem; color: var(--cream); }
+.tc-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: .6rem; color: var(--muted); letter-spacing: 1.5px;
+  text-transform: uppercase; margin-top: 3px;
+}
+.testi-highlight-card {
+  min-width: 260px;
+  background: linear-gradient(135deg, var(--caramel), var(--honey));
+  border-radius: 20px; padding: 32px;
+  scroll-snap-align: start;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  transition: transform .4s;
+}
+.testi-highlight-card:hover { transform: translateY(-5px) scale(1.02); }
+.thc-num {
+  font-family: 'Libre Caslon Display', serif;
+  font-size: 5rem; color: var(--espresso); line-height: 1;
+}
+.thc-text {
+  font-family: 'DM Mono', monospace; font-size: .65rem;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(26,14,8,.7); margin-top: 6px;
+}
+
+/* scroll arrows */
+.testi-nav {
+  display: flex; gap: 12px; margin-top: 28px;
+}
+.tn-btn {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,.15);
+  background: transparent;
+  color: var(--sand); font-size: 1.1rem;
+  cursor: none; display: flex; align-items: center; justify-content: center;
+  transition: all .3s;
+}
+.tn-btn:hover {
+  border-color: var(--caramel); color: var(--caramel);
+  background: rgba(192,120,40,.08);
+}
+
+/* ══════════════════════════════════════
+   LOCATION
+══════════════════════════════════════ */
+.location-section { background: var(--cream); }
+.loc-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: start; margin-top: 60px;
+}
+.info-stack { display: flex; flex-direction: column; gap: 14px; }
+.info-row {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 20px 22px;
+  background: var(--foam);
+  border: 1px solid rgba(192,120,40,.12);
+  border-radius: 14px; transition: all .3s;
+}
+.info-row:hover { border-color: var(--caramel); background: var(--latte); }
+.ir-icon {
+  font-size: 1.2rem; width: 42px; height: 42px; flex-shrink: 0;
+  background: rgba(192,120,40,.1);
+  border: 1px solid rgba(192,120,40,.15);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+.ir-label {
+  font-family: 'DM Mono', monospace;
+  font-size: .6rem; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--caramel); margin-bottom: 4px;
+}
+.ir-value { font-size: .95rem; color: var(--ink); line-height: 1.55; font-weight: 300; }
+.ir-value a { color: var(--caramel); text-decoration: none; font-weight: 400; }
+
+.map-frame {
+  border-radius: 20px; overflow: hidden;
+  height: 420px;
+  border: 1px solid rgba(192,120,40,.2);
+  position: relative;
+}
+.map-frame::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(192,120,40,.06), transparent 50%);
+  pointer-events: none; z-index: 1;
+}
+.map-frame iframe {
+  width: 100%; height: 100%; border: none;
+  filter: sepia(30%) contrast(1.1) brightness(.9);
+}
+
+/* ══════════════════════════════════════
+   FINAL CTA
+══════════════════════════════════════ */
+.final-section {
+  background: var(--espresso);
+  padding: 130px 5%; text-align: center;
+  position: relative; overflow: hidden;
+}
+/* animated ring */
+.final-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid rgba(192,120,40,.15);
+  animation: ringExpand 4s ease infinite;
+  pointer-events: none;
+}
+.final-ring:nth-child(1) { width: 400px; height: 400px; animation-delay: 0s; }
+.final-ring:nth-child(2) { width: 600px; height: 600px; animation-delay: 1s; }
+.final-ring:nth-child(3) { width: 800px; height: 800px; animation-delay: 2s; }
+@keyframes ringExpand {
+  0%   { opacity: .3; transform: translate(-50%,-50%) scale(.8); }
+  100% { opacity: 0; transform: translate(-50%,-50%) scale(1.2); }
+}
+
+.fc-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: .65rem; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--honey);
+  margin-bottom: 22px; display: block;
+  position: relative; z-index: 1;
+}
+.fc-title {
+  font-family: 'Libre Caslon Display', serif;
+  font-size: clamp(4rem,11vw, 9rem);
+  line-height: .88; letter-spacing: -3px;
+  color: var(--cream); margin-bottom: 10px;
+  position: relative; z-index: 1;
+}
+.fc-title em { font-style: italic; color: var(--caramel); }
+.fc-sub {
+  font-size: 1.05rem; font-weight: 300; font-style: italic;
+  color: var(--sand); margin-bottom: 52px;
+  position: relative; z-index: 1;
+}
+.fc-btns {
+  display: flex; gap: 16px; justify-content: center;
+  flex-wrap: wrap; position: relative; z-index: 1;
+}
+.fc-scarcity {
+  font-family: 'DM Mono', monospace;
+  font-size: .65rem; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--caramel);
+  margin-top: 32px; position: relative; z-index: 1;
+}
+.fc-scarcity::before { content: '⚡  '; }
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer {
+  background: var(--roast);
+  border-top: 1px solid rgba(255,255,255,.06);
+  padding: 70px 5% 30px;
+}
+.foot-grid {
+  display: grid; grid-template-columns: 1.8fr 1fr 1fr;
+  gap: 60px; margin-bottom: 50px;
+}
+.foot-logo {
+  font-family: 'Libre Caslon Display', serif;
+  font-size: 1.8rem; color: var(--cream);
+  display: block; margin-bottom: 14px;
+  text-decoration: none;
+}
+.foot-logo em { font-style: normal; color: var(--caramel); }
+.foot-desc {
+  font-size: .95rem; font-weight: 300;
+  color: var(--sand); line-height: 1.85;
+  margin-bottom: 26px;
+}
+.foot-soc { display: flex; gap: 10px; }
+.fs-btn {
+  width: 38px; height: 38px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .95rem; text-decoration: none;
+  color: var(--muted); transition: all .3s;
+}
+.fs-btn:hover { background: rgba(192,120,40,.15); border-color: rgba(192,120,40,.3); color: var(--caramel); }
+.foot-col-h {
+  font-family: 'DM Mono', monospace;
+  font-size: .62rem; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--caramel); margin-bottom: 20px;
+}
+.foot-links { display: flex; flex-direction: column; gap: 12px; list-style: none; }
+.foot-links a { font-size: .93rem; color: var(--sand); text-decoration: none; font-weight: 300; transition: color .25s; }
+.foot-links a:hover { color: var(--cream); }
+.foot-bottom {
+  border-top: 1px solid rgba(255,255,255,.06);
+  padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'DM Mono', monospace;
+  font-size: .62rem; letter-spacing: 1.5px;
+  color: var(--muted); text-transform: uppercase;
+}
+.foot-bottom span { color: var(--caramel); }
+
+/* ══════════════════════════════════════
+   FLOATING
+══════════════════════════════════════ */
+.floaters {
+  position: fixed; bottom: 28px; right: 28px;
+  display: flex; flex-direction: column; gap: 10px;
+  z-index: 900;
+}
+.flt {
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; text-decoration: none;
+  transition: transform .3s, box-shadow .3s;
+  box-shadow: 0 8px 28px rgba(0,0,0,.25);
+  position: relative;
+}
+.flt::before {
+  content: attr(data-t);
+  position: absolute; right: 62px; top: 50%;
+  transform: translateY(-50%);
+  background: var(--espresso);
+  border: 1px solid rgba(192,120,40,.2);
+  border-radius: 8px; padding: 5px 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: .6rem; letter-spacing: 1px;
+  color: var(--cream); white-space: nowrap;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s;
+}
+.flt:hover::before { opacity: 1; }
+.flt:hover { transform: scale(1.1); box-shadow: 0 14px 40px rgba(0,0,0,.35); }
+.flt-wa { background: #25D366; color: #fff; }
+.flt-ph { background: var(--caramel); color: var(--foam); }
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { clip-path: none; padding-bottom: 40px; }
+  .hero-right { padding-top: 40px; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .about-grid, .party-grid, .loc-grid, .foot-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 900px) {
+  nav ul.nav-links { display: none; }
+  .menu-grid { grid-template-columns: 1fr 1fr; }
+  .flip-card { height: 300px; }
+}
+@media (max-width: 600px) {
+  .menu-grid { grid-template-columns: 1fr; }
+  .flip-card { height: 280px; }
+  .form-grid-2 { grid-template-columns: 1fr; }
+  .full { grid-column: 1; }
+  .book-form { padding: 28px 20px; }
+  .foot-grid { grid-template-columns: 1fr; gap: 28px; }
+  .foot-bottom { flex-direction: column; gap: 8px; text-align: center; }
+  .fc-title { letter-spacing: -2px; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="c-dot" id="cdot"></div>
+<div class="c-ring" id="cring"></div>
+
+<!-- ══ NAV ══ -->
+<nav id="nav">
+  <a href="#" class="nav-logo"><em class="nav-logo-bolt">⚡</em> Thunder Cafe</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#party">Events</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Find Us</a></li>
+  </ul>
+  <a href="tel:09359823934" class="nav-pill">📞 093598 23934</a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="home">
+  <!-- LEFT panel: dark espresso -->
+  <div class="hero-left">
+    <!-- Steam animation -->
+    <div class="steam-wrap">
+      <svg class="steam-path" viewBox="0 0 12 60">
+        <path d="M6,55 C2,45 10,35 6,25 C2,15 10,5 6,0"/>
+      </svg>
+      <svg class="steam-path" viewBox="0 0 12 60">
+        <path d="M6,55 C10,45 2,35 6,25 C10,15 2,5 6,0"/>
+      </svg>
+      <svg class="steam-path" viewBox="0 0 12 60">
+        <path d="M6,55 C3,43 9,33 6,22 C3,11 9,3 6,0"/>
+      </svg>
+    </div>
+
+    <!-- Floating bean particles canvas -->
+    <canvas id="beans-canvas"></canvas>
+
+    <div class="hero-eyebrow">Balaghat, Madhya Pradesh · Open 11AM–11PM</div>
+
+    <!-- LETTER STAGGER TITLE -->
+    <h1 class="hero-title" id="heroTitle">
+      <span class="word" id="w1"></span><br>
+      <span class="word" id="w2"></span>
+    </h1>
+
+    <p class="hero-hindi">थे थंडर कैफे — जहाँ हर पल खास होता है</p>
+
+    <div class="hero-cta-group">
+      <a href="tel:09359823934" class="btn btn-warm">📞 Call Now</a>
+      <a href="#party" class="btn btn-outline">🎉 Book a Table</a>
+    </div>
+
+    <div class="scroll-hint">
+      <div class="scroll-arrow">↓</div>
+      Scroll to explore
+    </div>
+  </div>
+
+  <!-- RIGHT panel: cream -->
+  <div class="hero-right">
+    <div class="hero-right-content">
+      <div class="hero-right-tag">⭐ Balaghat's Most Loved Cafe</div>
+      <!-- SCRAMBLE HEADING -->
+      <h2 class="hero-scramble" id="scrambleHead">Cozy Vibes.<br>Real Flavors.<br>Your People.</h2>
+      <p class="hero-desc">
+        From our legendary white sauce pasta to birthday bashes that hit different — Thunder Cafe delivers every single time.
+      </p>
+      <div class="rating-badge">
+        <div class="rb-num">5.0</div>
+        <div>
+          <div class="rb-stars">★★★★★</div>
+          <div class="rb-text">45+ Google Reviews</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✦ CUP — direct child of .hero, OUTSIDE clip-path, floats on diagonal line -->
+  <div class="hero-float-img" id="heroCup">
+    <div class="float-steam">
+      <div class="float-steam-line"></div>
+      <div class="float-steam-line"></div>
+      <div class="float-steam-line"></div>
+    </div>
+    <svg class="float-cup-svg" viewBox="0 0 280 340" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bodyG" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#5c2a08"/>
+          <stop offset="30%"  stop-color="#a86520"/>
+          <stop offset="65%"  stop-color="#d4892e"/>
+          <stop offset="100%" stop-color="#e8b060"/>
+        </linearGradient>
+        <linearGradient id="saucG" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%"   stop-color="#9a5818"/>
+          <stop offset="100%" stop-color="#c07828"/>
+        </linearGradient>
+        <radialGradient id="coffeeG" cx="45%" cy="40%">
+          <stop offset="0%"   stop-color="#5a3010"/>
+          <stop offset="70%"  stop-color="#2e1608"/>
+          <stop offset="100%" stop-color="#1a0e04"/>
+        </radialGradient>
+        <radialGradient id="shineG" cx="30%" cy="30%">
+          <stop offset="0%"   stop-color="rgba(255,220,150,0.4)"/>
+          <stop offset="100%" stop-color="rgba(255,220,150,0)"/>
+        </radialGradient>
+        <linearGradient id="handleG" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#7a3e0a"/>
+          <stop offset="50%"  stop-color="#c07828"/>
+          <stop offset="100%" stop-color="#e09f3e"/>
+        </linearGradient>
+        <filter id="cupGlow" x="-25%" y="-25%" width="150%" height="150%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"/>
+          <feColorMatrix in="blur" type="matrix"
+            values="1 0.4 0 0 0  0.5 0.3 0 0 0  0 0 0 0 0  0 0 0 0.35 0"/>
+          <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <g filter="url(#cupGlow)">
+        <!-- Saucer shadow -->
+        <ellipse cx="140" cy="292" rx="90" ry="13" fill="rgba(0,0,0,0.30)"/>
+        <!-- Saucer body -->
+        <ellipse cx="140" cy="282" rx="92" ry="18" fill="url(#saucG)"/>
+        <ellipse cx="140" cy="279" rx="76" ry="12" fill="#c07828"/>
+        <ellipse cx="140" cy="278" rx="68" ry="8" fill="none" stroke="rgba(255,220,150,0.2)" stroke-width="2"/>
+        <ellipse cx="140" cy="277" rx="38" ry="5" fill="#a06018" opacity="0.5"/>
+        <!-- Cup body -->
+        <path d="M82,72 L198,72 L178,265 Q140,282 102,265 Z" fill="url(#bodyG)"/>
+        <path d="M82,72 L108,72 L93,265 Q102,272 102,265 Z" fill="rgba(0,0,0,0.25)"/>
+        <path d="M178,72 L198,72 L178,265 Q178,265 172,268 Z" fill="rgba(255,255,255,0.08)"/>
+        <!-- Rim -->
+        <ellipse cx="140" cy="72" rx="58" ry="14" fill="#b5711e"/>
+        <ellipse cx="140" cy="70" rx="56" ry="12" fill="#c07828"/>
+        <ellipse cx="140" cy="69" rx="50" ry="10" fill="#9a5818"/>
+        <path d="M98,65 Q140,58 182,65" fill="none" stroke="rgba(255,210,130,0.35)" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Coffee liquid -->
+        <ellipse cx="140" cy="72" rx="49" ry="10" fill="url(#coffeeG)"/>
+        <ellipse cx="128" cy="70" rx="20" ry="6" fill="url(#shineG)"/>
+        <!-- Latte heart -->
+        <path d="M127,68 C127,63 133,63 137,67 C141,63 147,63 147,68 C147,74 137,80 137,80 C137,80 127,74 127,68Z" fill="rgba(192,120,40,0.55)"/>
+        <path d="M130,66 Q137,64 144,66" fill="none" stroke="rgba(224,159,62,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- Handle -->
+        <path d="M198,100 Q242,100 242,165 Q242,230 198,230" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="20" stroke-linecap="round"/>
+        <path d="M198,100 Q238,100 238,165 Q238,230 198,230" fill="none" stroke="url(#handleG)" stroke-width="16" stroke-linecap="round"/>
+        <path d="M198,112 Q228,112 228,165 Q228,218 198,218" fill="none" stroke="rgba(255,210,130,0.2)" stroke-width="5" stroke-linecap="round"/>
+        <!-- Shine streaks -->
+        <path d="M96,92 Q100,160 97,232" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="8" stroke-linecap="round"/>
+        <path d="M108,85 Q111,130 110,175" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="4" stroke-linecap="round"/>
+        <ellipse cx="165" cy="110" rx="8" ry="14" fill="rgba(255,255,255,0.1)" transform="rotate(-20 165 110)"/>
+        <ellipse cx="140" cy="272" rx="45" ry="7" fill="rgba(0,0,0,0.2)"/>
+      </g>
+    </svg>
+  </div>
+
+</section>
+
+<!-- DIAGONAL DIVIDER -->
+<div class="diag-down"></div>
+
+<!-- ══ ABOUT ══ -->
+<section class="about-section" id="about">
+  <div class="about-grid">
+
+    <!-- ══ IMAGE BENTO GRID (left) ══ -->
+    <div class="bento-grid fr" style="position:relative;">
+
+      <!-- Cell 1: BIG TALL — Cozy cafe interior, spans 2 rows -->
+      <div class="bg-cell bg-tall">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=700&auto=format&fit=crop&q=88" alt="Cafe interior" loading="lazy">
+        <div class="bg-cell-overlay"></div>
+        <div class="bg-cell-label">Cozy Vibes</div>
+      </div>
+
+      <!-- Cell 2: Top right — Signature pasta -->
+      <div class="bg-cell bg-top-right">
+        <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=500&auto=format&fit=crop&q=88" alt="White sauce pasta" loading="lazy">
+        <div class="bg-cell-overlay"></div>
+        <div class="bg-cell-label">Signature Pasta</div>
+      </div>
+
+      <!-- Cell 3: Bottom right — Friends laughing -->
+      <div class="bg-cell bg-bottom-right">
+        <img src="https://images.unsplash.com/photo-1529543544282-ea669407fca3?w=500&auto=format&fit=crop&q=88" alt="Friends at cafe" loading="lazy">
+        <div class="bg-cell-overlay"></div>
+        <div class="bg-cell-label">Good Times</div>
+      </div>
+
+      <!-- Cell 4: WIDE BOTTOM — Coffee / drinks -->
+      <div class="bg-cell bg-wide">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=88&crop=center" alt="Coffee drinks" loading="lazy">
+        <div class="bg-cell-overlay"></div>
+        <div class="bg-cell-label">Premium Beverages</div>
+      </div>
+
+      <!-- Floating #1 badge -->
+      <div class="about-float">
+        <div class="af-num">#1</div>
+        <div class="af-text">Cafe · Balaghat</div>
+      </div>
+    </div>
+
+    <!-- ══ TEXT CONTENT (right) ══ -->
+    <div class="fr fr-d2">
+      <div class="eyebrow">Our Story</div>
+      <h2 class="sec-title">More Than<br>Just A <em>Cafe.</em></h2>
+      <p class="sec-sub">
+        Tucked in Subhash Chowk, Thunder Cafe is where Balaghat comes alive. We serve great food and even better energy. LGBTQ+ friendly. Budget-friendly. Always full of warmth.
+      </p>
+      <div class="about-info-chips">
+        <div class="aic"><span class="aic-icon">📍</span><span>Subhash Chowk, Balaghat</span></div>
+        <div class="aic"><span class="aic-icon">⏰</span><span>11 AM – 11 PM Daily</span></div>
+        <div class="aic"><span class="aic-icon">💰</span><span>₹200 – ₹400</span></div>
+        <div class="aic"><span class="aic-icon">🌈</span><span>LGBTQ+ Friendly</span></div>
+      </div>
+      <div class="feat-list">
+        <div class="feat-item"><span class="fi">⚡</span> Fast Service</div>
+        <div class="feat-item"><span class="fi">🛋️</span> Cozy Ambience</div>
+        <div class="feat-item"><span class="fi">🎂</span> Party Hosting</div>
+        <div class="feat-item"><span class="fi">🚗</span> Drive-Through</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STATS — ODOMETER ══ -->
+<section class="stats-section" id="stats">
+  <div class="stats-row fr">
+    <div class="stat-box">
+      <div class="odometer" data-val="5" data-dec="1" data-suf=" ⭐">
+        <div class="odo-digit" data-d="0"><div class="odo-reel"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+        <span class="odo-suffix">. 0 ⭐</span>
+      </div>
+      <div class="stat-label">Google Rating</div>
+    </div>
+    <div class="stat-box">
+      <div class="odometer" data-val="45">
+        <div class="odo-digit" data-d="4"><div class="odo-reel"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span></div></div>
+        <div class="odo-digit" data-d="5"><div class="odo-reel"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+        <span class="odo-suffix">+</span>
+      </div>
+      <div class="stat-label">Happy Customers</div>
+    </div>
+    <div class="stat-box">
+      <div class="odometer">
+        <span class="odo-prefix">₹</span>
+        <div class="odo-digit" data-d="2"><div class="odo-reel"><span>0</span><span>1</span><span>2</span></div></div>
+        <div class="odo-digit" data-d="0"><div class="odo-reel"><span>0</span></div></div>
+        <div class="odo-digit" data-d="0"><div class="odo-reel"><span>0</span></div></div>
+      </div>
+      <div class="stat-label">Starting Price</div>
+    </div>
+    <div class="stat-box">
+      <div class="odometer">
+        <div class="odo-digit" data-d="1"><div class="odo-reel"><span>0</span><span>1</span></div></div>
+        <div class="odo-digit" data-d="2"><div class="odo-reel"><span>0</span><span>1</span><span>2</span></div></div>
+        <span class="odo-suffix"> hrs</span>
+      </div>
+      <div class="stat-label">Open Daily</div>
+    </div>
+  </div>
+</section>
+
+<!-- DIAGONAL DIVIDER UP -->
+<div class="diag-up" style="background: var(--foam); position:relative; z-index:1; margin-top:-1px;"></div>
+
+<!-- ══ MENU — FLIP CARDS ══ -->
+<section class="menu-section" id="menu">
+  <div class="fr">
+    <div class="eyebrow">What We Serve</div>
+    <h2 class="sec-title">Our <em>Specialities</em></h2>
+    <p class="sec-sub">Hover a card to reveal the full story. Every dish made with love.</p>
+  </div>
+
+  <div class="menu-grid">
+    <!-- FLIP CARD 1 — White Sauce Pasta -->
+    <div class="flip-card fr">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="flip-front-photo" style="background-image:url('https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&auto=format&fit=crop&q=85')"></div>
+          <div class="flip-front-overlay"></div>
+          <div class="flip-front-content">
+            <div class="card-tag">⭐ Signature Dish</div>
+            <div class="card-name">White Sauce Pasta</div>
+            <div class="card-price">₹160</div>
+          </div>
+          <div class="flip-hint">Hover to reveal</div>
+        </div>
+        <div class="flip-back">
+          <div class="back-tag">The Legend</div>
+          <div class="back-desc">Our creamy, rich signature pasta that everyone in Balaghat talks about. Made fresh, served hot — this is the reason people keep coming back.</div>
+          <a href="tel:09359823934" class="back-cta">📞 Order Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLIP CARD 2 — Cheese Corn Maggi -->
+    <div class="flip-card fr fr-d1">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="flip-front-photo" style="background-image:url('https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&auto=format&fit=crop&q=85')"></div>
+          <div class="flip-front-overlay"></div>
+          <div class="flip-front-content">
+            <div class="card-tag">🔥 Best Seller</div>
+            <div class="card-name">Cheese Corn Maggi</div>
+            <div class="card-price">₹120</div>
+          </div>
+          <div class="flip-hint">Hover to reveal</div>
+        </div>
+        <div class="flip-back">
+          <div class="back-tag">Comfort Food</div>
+          <div class="back-desc">Everyone's comfort classic, Thunder-style. Loaded with melted cheese and sweet corn bursts that hit every time.</div>
+          <a href="tel:09359823934" class="back-cta">📞 Order Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLIP CARD 3 — Loaded Pizzas -->
+    <div class="flip-card fr fr-d2">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="flip-front-photo" style="background-image:url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&auto=format&fit=crop&q=85')"></div>
+          <div class="flip-front-overlay"></div>
+          <div class="flip-front-content">
+            <div class="card-tag">🍕 Must Try</div>
+            <div class="card-name">Loaded Pizzas</div>
+            <div class="card-price">₹180+</div>
+          </div>
+          <div class="flip-hint">Hover to reveal</div>
+        </div>
+        <div class="flip-back">
+          <div class="back-tag">Crowd Pleaser</div>
+          <div class="back-desc">Hand-stretched, oven-baked perfection. Choose your toppings and own the evening — the whole table will approve.</div>
+          <a href="tel:09359823934" class="back-cta">📞 Order Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLIP CARD 4 — Smash Burgers -->
+    <div class="flip-card fr">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="flip-front-photo" style="background-image:url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=85')"></div>
+          <div class="flip-front-overlay"></div>
+          <div class="flip-front-content">
+            <div class="card-tag">💥 Popular</div>
+            <div class="card-name">Smash Burgers</div>
+            <div class="card-price">₹150+</div>
+          </div>
+          <div class="flip-hint">Hover to reveal</div>
+        </div>
+        <div class="flip-back">
+          <div class="back-tag">Burger Game</div>
+          <div class="back-desc">Crispy-edged, juicy-centered and impossible to put down. The burger Balaghat didn't know it needed.</div>
+          <a href="tel:09359823934" class="back-cta">📞 Order Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLIP CARD 5 — Jamun Shots -->
+    <div class="flip-card fr fr-d1">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="flip-front-photo" style="background-image:url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600&auto=format&fit=crop&q=85')"></div>
+          <div class="flip-front-overlay"></div>
+          <div class="flip-front-content">
+            <div class="card-tag">✨ Unique</div>
+            <div class="card-name">Jamun Shots</div>
+            <div class="card-price">₹80</div>
+          </div>
+          <div class="flip-hint">Hover to reveal</div>
+        </div>
+        <div class="flip-back">
+          <div class="back-tag">Conversation Starter</div>
+          <div class="back-desc">A thunderous burst of tangy Indian berry flavor. Try it once, crave it always — the shot that steals the show.</div>
+          <a href="tel:09359823934" class="back-cta">📞 Order Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLIP CARD 6 -->
+    <div class="flip-card fr fr-d2">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="flip-front-photo" style="background-image:url('https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&auto=format&fit=crop&q=85')"></div>
+          <div class="flip-front-overlay"></div>
+          <div class="flip-front-content">
+            <div class="card-tag">❄️ Refreshing</div>
+            <div class="card-name">Beverages &amp; Shakes</div>
+            <div class="card-price">₹80+</div>
+          </div>
+          <div class="flip-hint">Hover to reveal</div>
+        </div>
+        <div class="flip-back">
+          <div class="back-tag">Cool Down</div>
+          <div class="back-desc">Cold coffees, fruit shakes and special Thunder blends. The perfect companion to any meal at the cafe.</div>
+          <a href="tel:09359823934" class="back-cta">📞 Order Now →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:50px;" class="fr">
+    <a href="tel:09359823934" class="btn btn-dark">📞 Call to Order</a>
+  </div>
+</section>
+
+<!-- DIAGONAL DIVIDER DOWN -->
+<div class="diag-down" style="background:var(--latte); clip-path:polygon(0 0,100% 0,100% 70%,0 100%);"></div>
+
+<!-- ══ PARTY ══ -->
+<section class="party-section" id="party">
+  <!-- SVG BLOB -->
+  <svg class="blob-bg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+    <path class="blob-path"/>
+  </svg>
+
+  <div class="party-grid">
+    <div class="fr">
+      <div class="eyebrow">Celebrations</div>
+      <h2 class="sec-title">Plan Your<br><em>Perfect Party</em></h2>
+      <p class="sec-sub">Thunder Cafe is Balaghat's go-to for celebrations big and small. From intimate dinners to full birthday bashes.</p>
+      <div class="party-feats">
+        <div class="pf"><div class="pf-ico">🎂</div><div><div class="pf-title">Birthday Parties</div><div class="pf-desc">Custom setups, cake-cutting moments, and vibes that make every birthday epic.</div></div></div>
+        <div class="pf"><div class="pf-ico">👥</div><div><div class="pf-title">Group Seating</div><div class="pf-desc">Comfortable arrangements for 10 to 30+ guests with personalized service.</div></div></div>
+        <div class="pf"><div class="pf-ico">🍽️</div><div><div class="pf-title">Custom Menus</div><div class="pf-desc">We'll craft a spread your guests will rave about — tell us your preferences.</div></div></div>
+        <div class="pf"><div class="pf-ico">🎊</div><div><div class="pf-title">Decoration Help</div><div class="pf-desc">Ask us about decoration support to make your event extra magical.</div></div></div>
+      </div>
+      <div class="scarcity-chip">
+        <div class="sc-dot"></div>
+        Evenings fill fast — Reserve early
+      </div>
+    </div>
+
+    <div class="fr fr-d2">
+      <div class="book-form">
+        <div class="form-h">Book Your Party ⚡</div>
+        <div class="form-grid-2" style="display:grid;gap:14px;margin-bottom:14px;">
+          <div class="fg">
+            <label>Your Name</label>
+            <input type="text" placeholder="Rahul Sharma">
+          </div>
+          <div class="fg">
+            <label>Phone</label>
+            <input type="tel" placeholder="98XXXXXXXX">
+          </div>
+          <div class="fg">
+            <label>Preferred Date</label>
+            <input type="date">
+          </div>
+          <div class="fg">
+            <label>No. of Guests</label>
+            <input type="number" placeholder="e.g. 15">
+          </div>
+          <div class="fg full">
+            <label>Occasion</label>
+            <select>
+              <option value="">Select occasion...</option>
+              <option>Birthday Party</option>
+              <option>Anniversary</option>
+              <option>Friends Gathering</option>
+              <option>Date Night</option>
+              <option>Office Party</option>
+              <option>Other Celebration</option>
+            </select>
+          </div>
+          <div class="fg full">
+            <label>Special Requests</label>
+            <textarea placeholder="Tell us what you'd like..."></textarea>
+          </div>
+        </div>
+        <button class="form-submit" onclick="handleBook()">⚡ Request My Booking</button>
+        <div class="form-alts">
+          <a href="https://wa.me/919359823934?text=Hi! Party booking required." target="_blank" class="fa-btn wa">💬 WhatsApp</a>
+          <a href="tel:09359823934" class="fa-btn ph">📞 Call Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section class="testi-section" id="reviews">
+  <div class="fr">
+    <div class="eyebrow">Customer Love</div>
+    <h2 class="sec-title" style="color:var(--cream);">What Balaghat <em>Says</em></h2>
+    <p class="sec-sub">Real reviews. Real people. A flawless 5-star record.</p>
+  </div>
+
+  <div class="testi-scroll" id="testiScroll">
+    <div class="testi-highlight-card">
+      <div class="thc-num">5.0</div>
+      <div style="color:#fff;font-size:1rem;letter-spacing:2px;margin:6px 0;">★★★★★</div>
+      <div class="thc-text">45+ Google Reviews<br>100% Five Star</div>
+    </div>
+    <div class="testi-card">
+      <div class="tc-stars">★★★★★</div>
+      <p class="tc-text">"Absolute hidden gem in Balaghat. The white sauce pasta is something else — I've been back 3 times this month. Totally worth every rupee."</p>
+      <div class="tc-author">Priya M.</div>
+      <div class="tc-sub">Google Review · Balaghat</div>
+    </div>
+    <div class="testi-card">
+      <div class="tc-stars">★★★★★</div>
+      <p class="tc-text">"Celebrated my birthday here and it was PERFECT. The staff went above and beyond. Great ambiance, great food — vibes are just unmatched."</p>
+      <div class="tc-author">Aditya K.</div>
+      <div class="tc-sub">Google Review · Balaghat</div>
+    </div>
+    <div class="testi-card">
+      <div class="tc-stars">★★★★★</div>
+      <p class="tc-text">"Came with a group of 12 for a farewell. Service was super fast, food was delicious, accommodated everything we asked. Highly recommended!"</p>
+      <div class="tc-author">Sneha R.</div>
+      <div class="tc-sub">Google Review · Balaghat</div>
+    </div>
+    <div class="testi-card">
+      <div class="tc-stars">★★★★★</div>
+      <p class="tc-text">"Best cafe near Subhash Chowk, hands down. Cozy, clean, friendly staff. The Jamun Shots are a must-try. Will keep coming back!"</p>
+      <div class="tc-author">Rohit S.</div>
+      <div class="tc-sub">Google Review · Balaghat</div>
+    </div>
+    <div class="testi-card">
+      <div class="tc-stars">★★★★★</div>
+      <p class="tc-text">"Ordered delivery and it arrived hot and perfectly packed. The cheese corn maggi is addictive. Very professional no-contact experience."</p>
+      <div class="tc-author">Kavita D.</div>
+      <div class="tc-sub">Google Review · Balaghat</div>
+    </div>
+  </div>
+
+  <div class="testi-nav">
+    <button class="tn-btn" onclick="scrollTesti(-1)">←</button>
+    <button class="tn-btn" onclick="scrollTesti(1)">→</button>
+  </div>
+</section>
+
+<!-- ══ LOCATION ══ -->
+<section class="location-section" id="contact">
+  <div class="fr">
+    <div class="eyebrow">Find Us</div>
+    <h2 class="sec-title">Come <em>Visit Us</em></h2>
+  </div>
+  <div class="loc-grid">
+    <div class="info-stack fr">
+      <div class="info-row">
+        <div class="ir-icon">📍</div>
+        <div>
+          <div class="ir-label">Address</div>
+          <div class="ir-value">1st Floor, Subhash Chowk, JC Complex,<br>beside Jai Hind Talkies Road,<br>Balaghat, MP 481001</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="ir-icon">📞</div>
+        <div>
+          <div class="ir-label">Phone</div>
+          <div class="ir-value"><a href="tel:09359823934">093598 23934</a></div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="ir-icon">⏰</div>
+        <div>
+          <div class="ir-label">Hours</div>
+          <div class="ir-value">Everyday &nbsp;|&nbsp; <strong>11:00 AM – 11:00 PM</strong></div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="ir-icon">🛵</div>
+        <div>
+          <div class="ir-label">Services</div>
+          <div class="ir-value">Dine-in · Drive-Through · No-Contact Delivery</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;">
+        <a href="https://maps.google.com/?q=Thunder+Cafe+Balaghat" target="_blank" class="btn btn-dark">🗺️ Get Directions</a>
+        <a href="https://wa.me/919359823934" target="_blank" class="btn btn-sage">💬 WhatsApp</a>
+      </div>
+    </div>
+    <div class="fr fr-d2">
+      <div class="map-frame">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.9!2d80.186!3d21.834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a2cddb0f4e2d9b7%3A0x1e8b5f3d2b4a!2sSubhash+Chowk%2C+Balaghat!5e0!3m2!1sen!2sin!4v1" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FINAL CTA ══ -->
+<section class="final-section">
+  <div class="final-ring"></div>
+  <div class="final-ring"></div>
+  <div class="final-ring"></div>
+  <div class="fr">
+    <span class="fc-tag">Don't wait — taste the thunder</span>
+    <h2 class="fc-title">Hungry?<br>Let's Fix <em>That.</em></h2>
+    <p class="fc-sub">Balaghat's most loved cafe is one call away.</p>
+    <div class="fc-btns">
+      <a href="tel:09359823934" class="btn btn-warm" style="font-size:.82rem;padding:17px 42px;">📞 Call Now</a>
+      <a href="#party" class="btn btn-outline" style="font-size:.82rem;padding:17px 42px;">🎉 Reserve Table</a>
+      <a href="https://wa.me/919359823934?text=Hi Thunder Cafe!" target="_blank" class="btn btn-sage" style="font-size:.82rem;padding:17px 42px;">💬 WhatsApp</a>
+    </div>
+    <p class="fc-scarcity">Evenings fill fast — Reserve your spot early.</p>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="foot-grid">
+    <div>
+      <a href="#" class="foot-logo">Thunder<em>Cafe</em></a>
+      <p class="foot-desc">Balaghat's favorite cafe for food, celebrations, and unforgettable vibes. Come as you are — leave craving more. थे थंडर कैफे।</p>
+      <div class="foot-soc">
+        <a href="#" class="fs-btn">📸</a>
+        <a href="https://wa.me/919359823934" class="fs-btn">💬</a>
+        <a href="tel:09359823934" class="fs-btn">📞</a>
+      </div>
+    </div>
+    <div>
+      <div class="foot-col-h">Quick Links</div>
+      <ul class="foot-links">
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#menu">Our Menu</a></li>
+        <li><a href="#party">Party Booking</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="foot-col-h">Contact</div>
+      <ul class="foot-links">
+        <li><a href="tel:09359823934">📞 093598 23934</a></li>
+        <li><a href="https://wa.me/919359823934">💬 WhatsApp</a></li>
+        <li style="color:var(--sand);font-size:.88rem;line-height:1.6;">Subhash Chowk, JC Complex<br>Balaghat, MP 481001</li>
+        <li style="color:var(--sand);font-size:.85rem;">11 AM – 11 PM · Everyday</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div>© 2025 The Thunder Cafe · Balaghat, Madhya Pradesh</div>
+    <div><span>⭐ 5.0 Google Rated</span> · थे थंडर कैफे</div>
+  </div>
+</footer>
+
+<!-- FLOATING BTNS -->
+<div class="floaters">
+  <a href="https://wa.me/919359823934?text=Hi!" target="_blank" class="flt flt-wa" data-t="WhatsApp Us">💬</a>
+  <a href="tel:09359823934" class="flt flt-ph" data-t="Call Now">📞</a>
+</div>
+
+<script>
+/* ── CURSOR ── */
+const dot = document.getElementById('cdot');
+const ring = document.getElementById('cring');
+let rx=0, ry=0, mx=0, my=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; dot.style.left=mx+'px'; dot.style.top=my+'px'; });
+(function raf(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(raf); })();
+document.querySelectorAll('a,button,.flip-card,.bento-cell').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
+});
+
+/* ── NAV ── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('stuck', scrollY>80));
+
+/* ── HERO LETTER STAGGER ── */
+const words = [['T','h','u','n','d','e','r'], ['C','a','f','e']];
+words.forEach((letters, wi) => {
+  const span = document.getElementById('w'+(wi+1));
+  letters.forEach((ch, i) => {
+    const l = document.createElement('span');
+    l.className = 'letter';
+    l.textContent = ch === ' ' ? '\u00A0' : ch;
+    l.style.animationDelay = (1.2 + wi * 0.4 + i * 0.06) + 's';
+    span.appendChild(l);
+  });
+});
+
+/* ── TEXT SCRAMBLE ── */
+const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ·—•';
+function scramble(el, target, delay=1800) {
+  const lines  = target.split('\n');
+  let iter = 0;
+  const allChars = target.replace(/\n/g,'').split('');
+  const total = allChars.length;
+  setTimeout(() => {
+    const id = setInterval(() => {
+      let ci = 0;
+      el.innerHTML = lines.map(line =>
+        line.split('').map((c, idx) => {
+          const gi = ci++;
+          if (c === ' ') return '&nbsp;';
+          if (gi < iter) return `<span style="opacity:1">${c}</span>`;
+          return `<span style="opacity:.35">${CHARS[Math.floor(Math.random()*CHARS.length)]}</span>`;
+        }).join('')
+      ).join('<br>');
+      if (iter >= total) clearInterval(id);
+      iter += 0.55; // very slow, cinematic
+    }, 90);
+  }, delay);
+}
+const sh = document.getElementById('scrambleHead');
+const orig = sh.innerText;
+scramble(sh, orig, 1800);
+
+/* ── SCROLL REVEAL (Intersection Observer) ── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fr, .wipe, .curtain').forEach(el => obs.observe(el));
+
+/* ── ODOMETER ── */
+const odoObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.querySelectorAll('.odo-digit').forEach(d => {
+      const target = parseInt(d.dataset.d);
+      const reel   = d.querySelector('.odo-reel');
+      const h      = d.offsetHeight || 60;
+      setTimeout(() => {
+        reel.style.transform = `translateY(-${target * h}px)`;
+      }, 200);
+    });
+    odoObs.unobserve(e.target);
+  });
+}, { threshold: 0.6 });
+document.querySelectorAll('.stats-row').forEach(el => odoObs.observe(el));
+
+/* ── TESTI SCROLL ── */
+function scrollTesti(dir) {
+  const el = document.getElementById('testiScroll');
+  el.scrollBy({ left: dir * 360, behavior: 'smooth' });
+}
+
+/* ── BOOKING ── */
+function handleBook() {
+  const inputs = document.querySelectorAll('.book-form input');
+  const name  = inputs[0].value;
+  const phone = inputs[1].value;
+  if (!name || !phone) {
+    const btn = document.querySelector('.form-submit');
+    const orig = btn.textContent;
+    btn.textContent = '⚠️ Fill Name & Phone first';
+    btn.style.background = 'rgba(192,120,40,.3)';
+    btn.style.color = 'var(--cream)';
+    setTimeout(() => { btn.textContent = orig; btn.style.background=''; btn.style.color=''; }, 2000);
+    return;
+  }
+  const date   = inputs[2].value;
+  const guests = inputs[3].value;
+  const occ    = document.querySelector('.book-form select').value;
+  const msg    = document.querySelector('.book-form textarea').value;
+  const text   = encodeURIComponent(`🎉 Party Booking\n\nName: ${name}\nPhone: ${phone}\nDate: ${date||'TBD'}\nGuests: ${guests||'TBD'}\nOccasion: ${occ||'TBD'}\nNote: ${msg||'—'}`);
+  window.open(`https://wa.me/919359823934?text=${text}`, '_blank');
+}
+
+/* ── RIPPLE ── */
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = '@keyframes rpl{to{transform:scale(3);opacity:0;}}';
+document.head.appendChild(rippleStyle);
+document.querySelectorAll('.btn, .form-submit').forEach(btn => {
+  btn.addEventListener('click', e => {
+    const r  = btn.getBoundingClientRect();
+    const rp = document.createElement('span');
+    const sz = Math.max(r.width, r.height);
+    rp.style.cssText = `position:absolute;width:${sz}px;height:${sz}px;border-radius:50%;background:rgba(255,255,255,.22);top:${e.clientY-r.top-sz/2}px;left:${e.clientX-r.left-sz/2}px;transform:scale(0);animation:rpl .55s ease;pointer-events:none;`;
+    btn.style.position='relative'; btn.style.overflow='hidden';
+    btn.appendChild(rp);
+    setTimeout(()=>rp.remove(), 560);
+  });
+});
+
+/* ── SVG BLOB path update (needs inline SVG path support fix) ── */
+// Blob animation is CSS-based and already runs via @keyframes blobMorph
+
+/* ── FLOATING COFFEE BEAN PARTICLES ── */
+(function() {
+  const canvas = document.getElementById('beans-canvas');
+  if (!canvas) return;
+  const heroLeft = canvas.parentElement;
+  function resize() {
+    canvas.width  = heroLeft.offsetWidth;
+    canvas.height = heroLeft.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  const ctx = canvas.getContext('2d');
+
+  // Draw a single coffee bean shape
+  function drawBean(ctx, x, y, size, angle, alpha) {
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.translate(x, y);
+    ctx.rotate(angle);
+    // Bean body (two overlapping ellipses)
+    ctx.beginPath();
+    ctx.ellipse(0, 0, size, size * 0.6, 0, 0, Math.PI * 2);
+    ctx.fillStyle = '#c07828';
+    ctx.fill();
+    // Center crease line
+    ctx.beginPath();
+    ctx.moveTo(-size, 0);
+    ctx.bezierCurveTo(-size * 0.5, -size * 0.3, size * 0.5, -size * 0.3, size, 0);
+    ctx.bezierCurveTo(size * 0.5, size * 0.3, -size * 0.5, size * 0.3, -size, 0);
+    ctx.strokeStyle = '#7a3e0a';
+    ctx.lineWidth = size * 0.18;
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // Create beans
+  const beans = Array.from({ length: 18 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size: Math.random() * 5 + 3,
+    angle: Math.random() * Math.PI * 2,
+    spinSpeed: (Math.random() - 0.5) * 0.008,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: -Math.random() * 0.25 - 0.1,
+    alpha: Math.random() * 0.18 + 0.05,
+  }));
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    beans.forEach(b => {
+      b.x += b.vx;
+      b.y += b.vy;
+      b.angle += b.spinSpeed;
+      if (b.y < -20) { b.y = canvas.height + 10; b.x = Math.random() * canvas.width; }
+      if (b.x < -20) b.x = canvas.width + 10;
+      if (b.x > canvas.width + 20) b.x = -10;
+      drawBean(ctx, b.x, b.y, b.size, b.angle, b.alpha);
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+</script>
+</body>
+</html>
